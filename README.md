@@ -41,8 +41,5 @@ As funções atualmente disponiveis são:
 + **Menos funções** - Por ser apenas um conjunto de funções mais usadas do JQuery, não tem suporte a animações ou métodos mais complicados.
 + **Multi-seletores** - As funções do JSU, por enquanto, não suportam mais de um seletor alvo.
 
-## Suporte
-Contribuindo com mais de R$10,00 você vai obter suporte vitálicio. Para contribuições entre em contato comigo pelo email aou-emmy@outlook.com ou pelo telefone (11) 95837-8163.
-
 ## Autore
 * **Emmy Gomes** - *Resposável por todo o projeto* - [eEmmy](https://github.com/eEmmy/)
