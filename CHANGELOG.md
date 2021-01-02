@@ -1,5 +1,5 @@
 # Changelog
-Log de mudançãs feitas no JSUtils.
+Log de mudanças feitas no JSUtils.
 
 ## Stable 
 ### 1.0.1
