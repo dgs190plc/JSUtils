@@ -52,27 +52,25 @@ jsu.on('click', '#tg', () => {
 
 // Ajax
 jsu.ajax({
-	// Parametros
-	method: 'GET',
-	url: 'https://viacep.com.br/ws/01001000/json/',
+	url: "url",
+	method: "POST/GET",
+	params: {
+		param1: "lorem",
+		param2: "ipsum"
+	},	
 
-	// Funções
 	beforeSend: () => {
-		alert('Começando requisição ajax');
+		// Função executada antes de enviar a requisição
+	}
+
+	success: (resp) => {
+		// Função executada em caso de sucesso
 	},
 
 	error: (status, response) => {
-		alert('A solicitação não foi concluida com sucesso, veja o console para mais informações');
-
-		jsu.log('Status do servidor: ' + response);
-		jsu.log('Resposta: ' + response);
-	},
-
-	success: (resp) => {
-		alert('Solicitação bem sucedida, veja o console para mais detalhes.');
-
-		jsu.log(resp);
+		// Função executada em caso de fracaso
 	}
+
 });
 
 // Grava no console

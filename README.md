@@ -2,7 +2,7 @@
 Um conjunto de funções presentes no framework JQuery que pesam apenas 3.7KB, contra 85KB do concorrente.
 
 ## Getting Started
-Tudo que você precisa é de um navegador (caso seja Internet Explorer, superior ao 6.0) e um editor de textos
+Tudo que você precisa é de um navegador (caso seja Internet Explorer, superior ao 6.0) e um editor de textos.
 
 ## Instalação
 **Debian/Ubuntu Linux Distros**

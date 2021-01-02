@@ -6,7 +6,7 @@ function JSU() {
 	// Retorna o mesmo que document.querySelector só que escrito de forma diminuta.
 	this.select = (target, all=false) => {
 		// Checa se é pra pegar todos os elementos
-		if (all == 'all') {
+		if (all == "all") {
 			// Retorna um array com os objetos
 			return document.querySelectorAll(target);
 		}
@@ -39,12 +39,12 @@ function JSU() {
 		console.log(toLog);
 	}
 
-	// Adiciona event listener's a objetos
+	// Adiciona event listener"s a objetos
 	this.on = (event, target, act, all=false) => {
 		// Verifica se o elemento existe
 		if (!this.exists(target)) {
 			// Exibe um erro no console
-			this.log('on: O seletor ' + target + ' não existe. Por favor informe um seletor valido.');
+			this.log("on: O seletor " + target + " não existe. Por favor informe um seletor valido.");
 			
 			// Retorna falso
 			return false;
@@ -56,7 +56,7 @@ function JSU() {
 		// Verifica se o event não está vazio
 		if (event.length == 0) {
 			// Exibe um erro no console
-			this.log('on: Não foi informado nenhum evento valido. Por favor informe um');
+			this.log("on: Não foi informado nenhum evento valido. Por favor informe um");
 			
 			// Retorna falso
 			return false;
@@ -72,7 +72,7 @@ function JSU() {
 	this.append = (target, element) => {
 		// Verifica se o elemento pai existe
 		if (!this.exists(target)) {
-			this.log("Append: o seletor " + target + ' não existe. Por favor informe um valido.');
+			this.log("Append: o seletor " + target + " não existe. Por favor informe um valido.");
 			return false;
 		}
 
@@ -80,14 +80,14 @@ function JSU() {
 		target = this.select(target);
 		
 		// Cria o elemento
-		target.insertAdjacentHTML('afterend', element);
+		target.insertAdjacentHTML("afterend", element);
 	}
 
 	// Remove um elemento
 	this.remove = (target) => {
 		// Verifica se o elemento alvo existe
 		if (target.length == 0) {
-			this.log("Remove: o seletor " + target + ' não existe. Por favor informe um valido.');
+			this.log("Remove: o seletor " + target + " não existe. Por favor informe um valido.");
 			return false;
 		}
 
@@ -108,7 +108,7 @@ function JSU() {
 
 		// Verifica se o elemento alvo existe
 		if (!this.exists(params.target)) {
-			this.log("Remove: o seletor " + target + ' não existe. Por favor informe um valido.');
+			this.log("Remove: o seletor " + target + " não existe. Por favor informe um valido.");
 			return false;
 		}
 
@@ -215,7 +215,7 @@ function JSU() {
 	this.toggleClass = (target, classes) => {
 		// Verifica se o elemento alvo existe
 		if (!this.exists(target)) {
-			this.log("toggleClass: o seletor " + target + ' não existe. Por favor informe um valido.');
+			this.log("toggleClass: o seletor " + target + " não existe. Por favor informe um valido.");
 			return false;
 		}
 
@@ -258,7 +258,7 @@ function JSU() {
 	this.addClass = (target, classes) => {
 		// Verifica se o elemento alvo existe
 		if (!this.exists(target)) {
-			this.log("addClass: o seletor " + target + ' não existe. Por favor informe um valido.');
+			this.log("addClass: o seletor " + target + " não existe. Por favor informe um valido.");
 			return false;
 		}
 
@@ -296,7 +296,7 @@ function JSU() {
 	this.removeClass = (target, classes) => {
 		// Verifica se o elemento alvo existe
 		if (!this.exists(target)) {
-			this.log("addCass: o seletor " + target + ' não existe. Por favor informe um valido.');
+			this.log("addCass: o seletor " + target + " não existe. Por favor informe um valido.");
 			return false;
 		}
 
@@ -319,23 +319,25 @@ function JSU() {
 		}
 	}
 
-	this.ajax = (params={beforeSend:null, success:null, error:null, method:'GET', url:null}) => {
+	this.ajax = (params={beforeSend:null, success:null, error:null, method:"GET", url:null, type:"application/json;charset=UTF-8", params:null}) => {
 		// Variaveis
 		var beforeSend = params.beforeSend;
 		var success = params.success;
 		var error = params.error;
 		var method = params.method;
 		var url = params.url;
+		var type = params.type;
+		var params = params.params;
 
 		// Checa se a url foi definida
 		if (url == null) {
-			this.log('Nenhuma URL foi definida. Por favor defina uma.');
+			this.log("Nenhuma URL foi definida. Por favor defina uma.");
 			return false;
 		}
 
 		// Checa se a função success foi definida
 		if (success == null) {
-			this.log('A função success não foi definida. Por favor defina-a.');
+			this.log("A função success não foi definida. Por favor defina-a.");
 			return false
 		}
 		
@@ -348,11 +350,41 @@ function JSU() {
 		// Cria o objeto XMLHttp
 		let xhr = new XMLHttpRequest();
 
-		// Abre a requisição
-		xhr.open(method, url);
+		// Verifica se o método é GET
+		if (method == "GET") {
+			// Verifica se parametros foram passados
+			if (params !== null) {
+				// Adiciona um ponto de interrogação (?) em url
+				url += "?";
 
-		// Executa a requisição
-		xhr.send();
+				// Loop em params
+				for(key in params) {
+					// Monta o parametro na url
+					url += key + "=" + params[key] + "&";
+				}
+
+				// Remove o ultimo & de url
+				url = url.replace(/&\s*$/, "");
+
+				this.log(url);
+			}
+		}
+
+		// Abre a requisição
+		xhr.open(method, url, true);
+
+		// Define o tipo da requisição
+		xhr.setRequestHeader("Content-type", type);
+
+		// Verifica se o método é POST
+		if (method == "POST") {
+			// Executa a requisição com parametros
+			xhr.send(JSON.stringify(params));
+		}
+		else {
+			// Executa a requisição sem parametros
+			xhr.send();
+		}
 
 		// Quando concluir a solicitação
 		xhr.onreadystatechange = () => {
@@ -368,11 +400,11 @@ function JSU() {
 					// Checa se a função error foi definida
 					if (error != null) {
 						// Executa a função error passando o status e a resposta da requisição
-						error(xhr.status, chr.responseText);
+						error(xhr.status, xhr.responseText);
 					}
 					// Caso não tenha sido definida uma função de erro, só retorna falso
 					else {
-						return false
+						return false;
 					}
 				}
 			}
