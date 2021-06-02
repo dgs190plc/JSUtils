@@ -40,6 +40,3 @@ As funções atualmente disponiveis são:
 #### Desvantagens
 + **Menos funções** - Por ser apenas um conjunto de funções mais usadas do JQuery, não tem suporte a animações ou métodos mais complicados.
 + **Multi-seletores** - As funções do JSU, por enquanto, não suportam mais de um seletor alvo.
-
-## Autore
-* **Emmy Gomes** - *Resposável por todo o projeto* - [eEmmy](https://github.com/eEmmy/)
